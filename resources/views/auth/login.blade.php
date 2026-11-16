@@ -6,73 +6,113 @@
     <title>Login - Sistem Parkir</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-slate-950 min-h-screen flex items-center justify-center relative overflow-hidden">
+<body class="bg-slate-950 min-h-screen">
 
-    <!-- Ambient glow blobs -->
-    <div class="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-blue-600/20 blur-3xl"></div>
-    <div class="absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-emerald-600/10 blur-3xl"></div>
+    <div class="grid min-h-screen lg:grid-cols-2">
 
-    <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-900 to-slate-950 shadow-[0_0_40px_-8px_rgba(59,130,246,0.35)] ring-1 ring-slate-700/50 w-full max-w-sm p-8">
-        <div class="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-blue-500/10 blur-2xl"></div>
+        <!-- ============ KIRI: FORM LOGIN ============ -->
+        <div class="relative flex items-center justify-center overflow-hidden px-6 py-10">
 
-        <div class="relative text-center mb-8">
-            <div class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 ring-1 ring-blue-400/40 shadow-[0_0_20px_-4px_rgba(59,130,246,0.7)]">
-                <span class="text-2xl font-bold text-blue-400 drop-shadow-[0_0_8px_rgba(96,165,250,0.8)]">P</span>
+            <!-- Ambient glow -->
+            <div class="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-blue-600/20 blur-3xl"></div>
+            <div class="absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-emerald-600/10 blur-3xl"></div>
+
+            <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-900 to-slate-950 shadow-[0_0_40px_-8px_rgba(59,130,246,0.35)] ring-1 ring-slate-700/50 w-full max-w-sm p-8">
+                <div class="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-blue-500/10 blur-2xl"></div>
+
+                <div class="relative text-center mb-8">
+                    <div class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 ring-1 ring-blue-400/40 shadow-[0_0_20px_-4px_rgba(59,130,246,0.7)]">
+                        <span class="text-2xl font-bold text-blue-400 drop-shadow-[0_0_8px_rgba(96,165,250,0.8)]">P</span>
+                    </div>
+                    <h1 class="text-xl font-bold text-gray-100">Sistem Parkir</h1>
+                    <p class="text-sm text-gray-400 mt-1">Silakan login untuk melanjutkan</p>
+                </div>
+
+                @if ($errors->any())
+                    <div class="relative mb-4 rounded-md bg-red-500/10 text-red-400 ring-1 ring-red-500/30 px-4 py-3 text-sm">
+                        @foreach ($errors->all() as $error)
+                            <p>{{ $error }}</p>
+                        @endforeach
+                    </div>
+                @endif
+
+                <form action="{{ route('login') }}" method="POST" class="relative space-y-4">
+                    @csrf
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-1">Email</label>
+                        <input type="email" name="email" value="{{ old('email') }}" required autofocus
+                               class="w-full bg-slate-800/60 border border-slate-700 text-gray-100 placeholder-gray-500 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-1">Password</label>
+                        <input type="password" name="password" required
+                               class="w-full bg-slate-800/60 border border-slate-700 text-gray-100 placeholder-gray-500 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50">
+                    </div>
+                    <label class="flex items-center gap-2 text-sm text-gray-400">
+                        <input type="checkbox" name="remember" class="rounded border-slate-600 bg-slate-800 text-blue-500 focus:ring-blue-500/50">
+                        Ingat saya
+                    </label>
+                    <button type="submit"
+                            class="w-full bg-blue-600 hover:bg-blue-500 text-white font-medium py-2 rounded-md text-sm shadow-[0_0_20px_-4px_rgba(59,130,246,0.8)] transition-colors">
+                        Login
+                    </button>
+                </form>
+
+                <p class="relative text-center text-sm text-gray-400 mt-6">
+                    Belum punya akun?
+                    <a href="{{ route('register') }}" class="text-blue-400 hover:text-blue-300 hover:underline font-medium">Daftar</a>
+                </p>
+
+                <p class="relative text-center text-xs text-gray-500 mt-4">
+                    Dengan masuk atau mendaftar, Anda menyetujui aturan penggunaan sistem.
+                </p>
+                <button type="button" id="openHelp"
+                        class="relative mx-auto mt-2 block rounded px-2 py-1 text-sm font-medium text-blue-400 underline underline-offset-4 hover:text-blue-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50">
+                    Cara penggunaan &amp; aturan parkir
+                </button>
             </div>
-            <h1 class="text-xl font-bold text-gray-100">Sistem Parkir</h1>
-            <p class="text-sm text-gray-400 mt-1">Silakan login untuk melanjutkan</p>
-            <!-- BARU: deskripsi singkat -->
-            <p class="text-xs text-gray-500 mt-2 leading-relaxed">
-                Kelola area parkir, tarif, dan data kendaraan dalam satu tempat.
-            </p>
         </div>
 
-        @if ($errors->any())
-            <div class="relative mb-4 rounded-md bg-red-500/10 text-red-400 ring-1 ring-red-500/30 px-4 py-3 text-sm">
-                @foreach ($errors->all() as $error)
-                    <p>{{ $error }}</p>
-                @endforeach
-            </div>
-        @endif
+        <!-- ============ KANAN: INFO AREA PARKIR (disembunyikan di HP) ============ -->
+        <aside class="relative hidden lg:flex flex-col justify-center overflow-hidden border-l border-slate-800 bg-gradient-to-br from-blue-950 via-slate-900 to-slate-950 px-14 py-10">
 
-        <form action="{{ route('login') }}" method="POST" class="relative space-y-4">
-            @csrf
-            <div>
-                <label class="block text-sm font-medium text-gray-300 mb-1">Email</label>
-                <input type="email" name="email" value="{{ old('email') }}" required autofocus
-                       class="w-full bg-slate-800/60 border border-slate-700 text-gray-100 placeholder-gray-500 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50">
-            </div>
-            <div>
-                <label class="block text-sm font-medium text-gray-300 mb-1">Password</label>
-                <input type="password" name="password" required
-                       class="w-full bg-slate-800/60 border border-slate-700 text-gray-100 placeholder-gray-500 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50">
-            </div>
-            <label class="flex items-center gap-2 text-sm text-gray-400">
-                <input type="checkbox" name="remember" class="rounded border-slate-600 bg-slate-800 text-blue-500 focus:ring-blue-500/50">
-                Ingat saya
-            </label>
-            <button type="submit"
-                    class="w-full bg-blue-600 hover:bg-blue-500 text-white font-medium py-2 rounded-md text-sm shadow-[0_0_20px_-4px_rgba(59,130,246,0.8)] transition-colors">
-                Login
-            </button>
-        </form>
+            <div class="absolute -right-20 top-10 h-72 w-72 rounded-full bg-blue-500/10 blur-3xl"></div>
 
-        <p class="relative text-center text-sm text-gray-400 mt-6">
-            Belum punya akun?
-            <a href="{{ route('register') }}" class="text-blue-400 hover:text-blue-300 hover:underline font-medium">Daftar</a>
-        </p>
+            <div class="relative max-w-md">
+                <h2 class="text-3xl font-bold leading-tight text-gray-100">
+                    Kelola parkir lebih rapi dan cepat.
+                </h2>
+                <p class="mt-3 text-sm leading-relaxed text-gray-400">
+                    Sistem Parkir membantu petugas dan admin mencatat kendaraan, menghitung biaya, dan memantau area parkir dari satu tempat.
+                </p>
 
-        <!-- BARU: teks ketentuan + tombol bantuan -->
-        <p class="relative text-center text-xs text-gray-500 mt-4">
-            Dengan masuk atau mendaftar, Anda menyetujui aturan penggunaan sistem.
-        </p>
-        <button type="button" id="openHelp"
-                class="relative mx-auto mt-2 block rounded px-2 py-1 text-sm font-medium text-blue-400 underline underline-offset-4 hover:text-blue-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50">
-            Cara penggunaan &amp; aturan parkir
-        </button>
+                <dl class="mt-8 space-y-5 border-l border-blue-400/30 pl-5">
+                    <div>
+                        <dt class="text-sm font-semibold text-gray-100">Area parkir</dt>
+                        <dd class="mt-0.5 text-sm leading-relaxed text-gray-400">Atur area dan kapasitas, lalu lihat kendaraan yang sedang parkir.</dd>
+                    </div>
+                    <div>
+                        <dt class="text-sm font-semibold text-gray-100">Tarif per jam</dt>
+                        <dd class="mt-0.5 text-sm leading-relaxed text-gray-400">Biaya dihitung otomatis dari durasi parkir dan jenis kendaraan.</dd>
+                    </div>
+                    <div>
+                        <dt class="text-sm font-semibold text-gray-100">Data kendaraan</dt>
+                        <dd class="mt-0.5 text-sm leading-relaxed text-gray-400">Catat plat nomor, jenis kendaraan, serta waktu masuk dan keluar.</dd>
+                    </div>
+                    <div>
+                        <dt class="text-sm font-semibold text-gray-100">Log aktivitas</dt>
+                        <dd class="mt-0.5 text-sm leading-relaxed text-gray-400">Setiap aktivitas tercatat dan tidak dapat dihapus oleh petugas.</dd>
+                    </div>
+                </dl>
+
+                <p class="mt-8 text-sm text-gray-300">
+                    Jam operasional: <span class="text-amber-400">06:00 - 12:30</span>
+                </p>
+            </div>
+        </aside>
     </div>
 
-    <!-- BARU: modal bantuan -->
+    <!-- ============ MODAL BANTUAN ============ -->
     <dialog id="helpModal" aria-labelledby="helpTitle"
             class="m-auto w-[calc(100%-2rem)] max-w-lg rounded-2xl bg-slate-900 p-0 text-gray-200 ring-1 ring-blue-400/25 shadow-2xl backdrop:bg-slate-950/70">
         <div class="flex max-h-[85vh] flex-col">
@@ -113,7 +153,6 @@
         </div>
     </dialog>
 
-    <!-- BARU: script buka/tutup modal -->
     <script>
         (function () {
             const modal = document.getElementById('helpModal');

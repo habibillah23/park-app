@@ -62,6 +62,22 @@
         </div>
     </div>
 
+ {{-- Pendapatan  --}}
+     <div class="relative mb-6 overflow-hidden rounded-2xl bg-gradient-to-br from-slate-900 to-violet-950 p-5 text-white shadow-[0_0_25px_-5px_rgba(139,92,246,0.6)] ring-1 ring-violet-500/30">
+            <div class="absolute -right-6 -top-6 h-28 w-28 rounded-full bg-violet-500/20 blur-2xl"></div>
+            <div class="relative flex items-center justify-between">
+                <div>
+                    <p class="text-sm text-violet-300/80">Total Pendapatan</p>
+                    <p class="text-2xl font-bold mt-1 text-violet-400 drop-shadow-[0_0_10px_rgba(167,139,250,0.8)]">Rp {{ number_format($totalPendapatan, 0, ',', '.') }}</p>
+                </div>
+                <div class="bg-violet-500/10 rounded-xl p-3 ring-1 ring-violet-400/40">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-violet-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M3 7h15a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V7zm0 0V6a2 2 0 0 1 2-2h11M17 14h.01"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    
     {{-- Status Area Parkir --}}
     <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-900 to-slate-950 p-6 text-white shadow-[0_0_30px_-8px_rgba(148,163,184,0.4)] ring-1 ring-slate-700/50">
         <div class="flex items-center justify-between mb-4">

@@ -20,6 +20,7 @@ class DashboardController extends Controller
             'pendapatanHariIni' => Transaksi::where('status', 'selesai')
                 ->whereDate('waktu_keluar', today())
                 ->sum('total_bayar'),
+                 'totalPendapatan' => Transaksi::where('status', 'selesai')->sum('total_bayar'),
             'areaParkirs' => AreaParkir::where('status', 'aktif')->get(),
         ];
 

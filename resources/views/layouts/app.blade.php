@@ -13,7 +13,17 @@
         <!-- Sidebar -->
         <aside class="w-64 bg-slate-900 text-slate-100 flex flex-col border-r border-slate-800">
             <div class="px-6 py-5 text-xl font-bold border-b border-slate-800">
-                🅿️ Parkir App
+          <div class="flex items-center gap-3">
+    <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-500/10 text-blue-400 ring-1 ring-blue-400/40 shadow-[0_0_14px_-3px_rgba(59,130,246,0.7)]">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" class="h-5 w-5">
+            <circle cx="12" cy="12" r="9.5" stroke-width="3"/>
+            <circle cx="12" cy="12" r="5" stroke-width="1.5"/>
+            <circle cx="12" cy="12" r="1.6" stroke-width="1.5"/>
+            <path d="M12 7V10.4M12 13.6V17M7 12h3.4M13.6 12H17" stroke-width="1.5"/>
+        </svg>
+    </span>
+    <span>HBBPARK</span>
+</div>
             </div>
             <nav class="flex-1 px-3 py-4 space-y-1 text-sm">
                 <a href="{{ route('dashboard') }}"
