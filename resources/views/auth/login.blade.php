@@ -21,6 +21,10 @@
             </div>
             <h1 class="text-xl font-bold text-gray-100">Sistem Parkir</h1>
             <p class="text-sm text-gray-400 mt-1">Silakan login untuk melanjutkan</p>
+            <!-- BARU: deskripsi singkat -->
+            <p class="text-xs text-gray-500 mt-2 leading-relaxed">
+                Kelola area parkir, tarif, dan data kendaraan dalam satu tempat.
+            </p>
         </div>
 
         @if ($errors->any())
@@ -57,6 +61,69 @@
             Belum punya akun?
             <a href="{{ route('register') }}" class="text-blue-400 hover:text-blue-300 hover:underline font-medium">Daftar</a>
         </p>
+
+        <!-- BARU: teks ketentuan + tombol bantuan -->
+        <p class="relative text-center text-xs text-gray-500 mt-4">
+            Dengan masuk atau mendaftar, Anda menyetujui aturan penggunaan sistem.
+        </p>
+        <button type="button" id="openHelp"
+                class="relative mx-auto mt-2 block rounded px-2 py-1 text-sm font-medium text-blue-400 underline underline-offset-4 hover:text-blue-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50">
+            Cara penggunaan &amp; aturan parkir
+        </button>
     </div>
+
+    <!-- BARU: modal bantuan -->
+    <dialog id="helpModal" aria-labelledby="helpTitle"
+            class="m-auto w-[calc(100%-2rem)] max-w-lg rounded-2xl bg-slate-900 p-0 text-gray-200 ring-1 ring-blue-400/25 shadow-2xl backdrop:bg-slate-950/70">
+        <div class="flex max-h-[85vh] flex-col">
+            <div class="flex items-center justify-between gap-3 border-b border-slate-700/60 px-5 py-4">
+                <h2 id="helpTitle" class="text-base font-semibold text-gray-100">Cara penggunaan &amp; aturan parkir</h2>
+                <button type="button" id="closeHelp" aria-label="Tutup"
+                        class="flex h-8 w-8 items-center justify-center rounded-lg text-xl leading-none text-gray-400 hover:bg-slate-800 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50">
+                    &times;
+                </button>
+            </div>
+
+            <div class="overflow-y-auto px-5 pb-5 pt-1 text-sm leading-relaxed text-gray-300">
+                <h3 class="mb-1.5 mt-4 font-semibold text-gray-100">Cara kerja sistem</h3>
+                <ol class="list-decimal space-y-1 pl-5">
+                    <li>Login dengan akun yang sudah terdaftar.</li>
+                    <li>Petugas mencatat kendaraan yang masuk: plat nomor, jenis kendaraan, dan area parkir.</li>
+                    <li>Sistem menghitung durasi dan biaya berdasarkan tarif yang berlaku.</li>
+                    <li>Saat kendaraan keluar, petugas mengonfirmasi pembayaran dan data tersimpan di log aktivitas.</li>
+                </ol>
+
+                <h3 class="mb-1.5 mt-4 font-semibold text-gray-100">Hak akses</h3>
+                <ul class="list-disc space-y-1 pl-5">
+                    <li><strong>Admin</strong>: mengelola user, tarif, area parkir, dan melihat log aktivitas.</li>
+                    <li><strong>Petugas</strong>: mencatat kendaraan masuk dan keluar.</li>
+                </ul>
+
+                <h3 class="mb-1.5 mt-4 font-semibold text-gray-100">Aturan parkir</h3>
+                <ul class="list-disc space-y-1 pl-5">
+                    <li>Jam operasional: <span class="text-amber-400">06:00 - 12:30</span>.</li>
+                    <li>Tarif dihitung per jam dan berbeda tiap jenis kendaraan.</li>
+                    <li>Karcis atau kode parkir yang hilang dikenakan denda: <span class="text-amber-400">RP:10,000</span>.</li>
+                    <li>Setiap aktivitas tercatat dan tidak dapat dihapus oleh petugas.</li>
+                </ul>
+
+                <h3 class="mb-1.5 mt-4 font-semibold text-gray-100">Butuh bantuan?</h3>
+                <p>Jika lupa password atau akun bermasalah, hubungi admin: <span class="text-amber-400">admin@gmail.parkir</span>.</p>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- BARU: script buka/tutup modal -->
+    <script>
+        (function () {
+            const modal = document.getElementById('helpModal');
+            document.getElementById('openHelp').addEventListener('click', () => modal.showModal());
+            document.getElementById('closeHelp').addEventListener('click', () => modal.close());
+            // klik area gelap di luar kotak modal untuk menutup
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) modal.close();
+            });
+        })();
+    </script>
 </body>
 </html>
