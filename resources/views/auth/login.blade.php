@@ -57,14 +57,8 @@
                         Login
                     </button>
                 </form>
-
-                <p class="relative text-center text-sm text-gray-400 mt-6">
-                    Belum punya akun?
-                    <a href="{{ route('register') }}" class="text-blue-400 hover:text-blue-300 hover:underline font-medium">Daftar</a>
-                </p>
-
                 <p class="relative text-center text-xs text-gray-500 mt-4">
-                    Dengan masuk atau mendaftar, Anda menyetujui aturan penggunaan sistem.
+                  Dengan masuk atau mendaftar, Anda menyetujui aturan penggunaan sistem.
                 </p>
                 <button type="button" id="openHelp"
                         class="relative mx-auto mt-2 block rounded px-2 py-1 text-sm font-medium text-blue-400 underline underline-offset-4 hover:text-blue-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50">
