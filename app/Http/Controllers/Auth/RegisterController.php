@@ -30,7 +30,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'role' => 'petugas',
+            'role' => 'pelanggan',
         ]);
 
         Auth::login($user);
@@ -39,6 +39,6 @@ class RegisterController extends Controller
 
         ActivityLogger::log('Registrasi akun baru');
 
-        return redirect()->route('dashboard');
+       return redirect()->route('booking.index');
     }
 }
